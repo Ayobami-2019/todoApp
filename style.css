@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+body{
+    background-color: #e5e5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+main{
+    /* color: #666565; */
+    padding: 20px;
+    background: #ffffff;
+    /* height: 90vh; */
+    width: 500px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 8px 24px, rgba(0, 0, 0, 0.35) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}

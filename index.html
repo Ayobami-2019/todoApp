@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/dicIcon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List</title>
+</head>
+<body>
+    <script src="template.js"></script>
+    <script src="script.js"></script>
+    <main>
+        
+        <task-heading icon="" title="Back to List"></task-heading>
+        <to-do title="TODAY" icon="">
+            <div slot="input"></div>
+            <div slot="bar"></div>
+            <div slot="todos">
+            </div>
+        </to-do>
+
+        <sentence-div title="pull from recurring lists"></sentence-div>
+        <frequency-div>
+            <li slot="freq" style="background-color:#f5ed84;">Daily</li>
+            <li slot="freq" style="background-color:#b5ea81;">Weekly</li>
+            <li slot="freq" style="background-color:#f8aaaa;">Monthly</li>
+            <li slot="freq" style="background-color:#b3b3ef;">Occassionally</li>  
+        </frequency-div>
+    </main>
+    
+</body>
+</html>
