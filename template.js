@@ -111,7 +111,6 @@ todo.innerHTML=`
         .todoDiv{
             display: flex;
             flex-direction: column;
-            gap: 20px;
             color: #666565;
             font-size: 20px;
         }
@@ -138,6 +137,7 @@ todo.innerHTML=`
             right: 0;
             color: #b5ea81;
             display: none;
+            font-size: 24px;
         }
         .hide{
             
@@ -212,11 +212,11 @@ todo.innerHTML=`
             <svg id="toggle-info" xmlns="http://www.w3.org/2000/svg" height="12" width="10.5" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#babaf0" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
         </div>
         
-        <div id="input">
+        <div id="input"><slot name="input"></slot>
             <input type="text" placeholder="Add a new task" />
             <button id="addInput">Add</button>
         </div>
-        <div class="barDiv" >
+        <div class="barDiv" ><slot name="bar"></slot>
             <div class="bar-div">
                 <div class="bar"></div></div>
             <p>33% Complete</p> 

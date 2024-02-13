@@ -158,30 +158,6 @@ class ToDo extends RootComponent{
             };
         };
     };
-        
-        
-    
-        
-   // updateProgressbar() {
-    
-
-        // // SETUP LOCAL STORAGE
-    setupLocalStorage(box) {
-        let storageId = box.getAttribute("id");
-        var oldVal    = localStorage.getItem(storageId);
-        
-        // initial sync with local storage
-        if (oldVal == "true") {
-            box.checked = true;
-        } else {
-            box.checked = false;
-        };     
-        
-        box.addEventListener("change", function() {
-            localStorage.setItem(storageId, this.checked); 
-        });
-    
-    };
 
     connectedCallback() {
         
