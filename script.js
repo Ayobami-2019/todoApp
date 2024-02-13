@@ -45,15 +45,15 @@ class ToDo extends RootComponent{
         //add new item method
     addValueSubmitted(){
         let getInputValue=this.shadowRoot.querySelector("input");
-        let newInputField=this.shadowRoot.querySelector("#addInput");
-        console.log(getInputValue.value);
+        let scroll=this.shadowRoot.querySelector(".todoDiv");
+        //console.log(getInputValue.value);
     
         
         //getInputValue and append to the existing list
         console.log(getInputValue.value);
         let inputValue=getInputValue.value
         console.log (inputValue)
-        this.shadowRoot.querySelector("input").value=""
+        this.shadowRoot.querySelector("input").value
         let newToDoDiv=document.createElement("div");
         newToDoDiv.classList.add("eachToDo");
         newToDoDiv.innerHTML=
@@ -66,6 +66,7 @@ class ToDo extends RootComponent{
         `
         console.log (newToDoDiv)
         this.shadowRoot.querySelector(".todoDiv").append(newToDoDiv);
+        scroll.scrollIntoView()
 
         getInputValue.value=""
     } 

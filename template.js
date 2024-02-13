@@ -113,6 +113,11 @@ todo.innerHTML=`
             flex-direction: column;
             color: #666565;
             font-size: 20px;
+            overflow-y: scroll;
+            height: 400px;
+        }
+        .todoDiv::-webkit-scrollbar {
+            width: 1px;
         }
         .eachToDo{
             display: flex;
