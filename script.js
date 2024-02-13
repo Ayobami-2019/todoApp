@@ -10,6 +10,7 @@ class RootComponent extends HTMLElement{
 class TaskHeading extends RootComponent{
     constructor(){
         super();
+        //append template to class
         this.shadowRoot.appendChild(heading.content.cloneNode(true));
     }
     connectedCallback() {
@@ -20,8 +21,10 @@ class TaskHeading extends RootComponent{
 class ToDo extends RootComponent{
     constructor(){
         super();
+        //append template to class
         this.shadowRoot.appendChild(todo.content.cloneNode(true));
     }
+    //let plus icon open an input field
     toggleInput(){
         console.log(123)
         this.showInfo=!this.showInfo;
@@ -39,79 +42,167 @@ class ToDo extends RootComponent{
         }
     };
     
-        //add new item
+        //add new item method
     addValueSubmitted(){
         let getInputValue=this.shadowRoot.querySelector("input");
         let newInputField=this.shadowRoot.querySelector("#addInput");
         console.log(getInputValue.value);
-        //this.shadowRoot.append(getInputValue.value);
+    
         
-        //getInputValue
-        console.log(getInputValue);
-        
-        
-        // this.shadowRoot.querySelector("input").value=""
-        // let newToDoDiv=document.createElement("div");
-        // newToDoDiv.classList.add("eachToDo");
-        // let newLabel=`<label class="container">
-        //     <input type="checkbox"  name="done" id="done">
-        //     <span class="checkmark"></span>
-        //     <p>${getInputValue.value}</p>
-        // </label>`
-        // console.log (newLabel)
-        // let checkbox=document.createElement("input")
-        // checkbox.innerHTML=newLabel
-        // newToDoDiv.append(newLabel);
-        // let newItem=document.createElement("p");
-        // let newItemValue=getInputValue.value;
-        // let pick=document.createElement("input[type:checkbox]");
-        // console.log(pick)
-        // newItem.textContent=newItemValue;
-        // console.log(newItem);
-        // //newToDoDiv.append(newLabel);
-        // newToDoDiv.append(pick);
-        // newToDoDiv.append(newItem);
-        // this.shadowRoot.querySelector(".eachToDo").append(newToDoDiv);
+        //getInputValue and append to the existing list
+        console.log(getInputValue.value);
+        let inputValue=getInputValue.value
+        console.log (inputValue)
+        this.shadowRoot.querySelector("input").value=""
+        let newToDoDiv=document.createElement("div");
+        newToDoDiv.classList.add("eachToDo");
+        newToDoDiv.innerHTML=
+        `
+        <label class="container">
+            <input type="checkbox"  name="done" id="done">
+            <span class="checkmark"></span>
+        </label>
+        <p>${inputValue}</p>
+        `
+        console.log (newToDoDiv)
+        this.shadowRoot.querySelector(".todoDiv").append(newToDoDiv);
 
         getInputValue.value=""
     } 
-
- 
-    toggleCancel(){
-        console.log(123)
-        this.showColor=!this.showColor;
-        const cancel=this.shadowRoot.querySelector(".eachTodo")
-        this.showCancel=!this.showCancel;
-        this.shadowRoot.querySelectorAll(".cancel").forEach(item=>{
-            if(this.showCancel){
-                item.style.display ="block";
-                
-            } else{
-                item.style.display ="none";
-
+    // method to add or remove a selected item
+    todoAddRemove () {
+        let item= this.shadowRoot.querySelectorAll(".eachToDo");
+        console.log(item)
+        let cancel= this.shadowRoot.querySelectorAll(".eachToDo .cancel");
+        console.log(cancel)
+        for(let i=0; i<item.length; i++){
+            item[i].onclick= function(){
+                this.showCancel=!this.showCancel;
+                if(this.showCancel){
+                    cancel[i].style.display ="block";
+                } else{
+                    cancel[i].style.display ="none";
+                } 
             }
-        });
+        }
+        for(let i=0; i<cancel.length; i++){
+            cancel[i].onclick= function(){
+                item[i].remove()
+            }
+        }
     }
-    deleteItem(){
-        this.remove()
-    }
-    // addNewToDo(){
+    // CHECKBOX LIST WITH PROGRESS BAR AND LOCAL STORAGE
+    progressBar(){
         
-    // }
-    connectedCallback() {
-        this.shadowRoot.querySelector(".eachToDo").addEventListener("click", () => this.toggleCancel());
+        let checkboxinputs = this.shadowRoot.querySelectorAll("input[type='checkbox']");
+        console.log(checkboxinputs)
+        let progressbar = this.shadowRoot.querySelector('.bar');
+        console.log(progressbar)
+        let progressValue = this.shadowRoot.querySelector('.barDiv p');
+        console.log(progressValue)
+        let checked=this.shadowRoot.querySelectorAll('input[type="checkbox"]:checked');
+        console.log(checked)
+        let initialprogressNum=((checked.length/checkboxinputs.length) * 100) +"%";
+        console.log(initialprogressNum);
+        let initialprogress = Math.round((checked.length/checkboxinputs.length) * 100);
+        let initialprogresspercentage = initialprogress+ '% Complete';
+        if (initialprogressNum === 100) {
+           // progressbar.style.backgroundColor = "#b3b3ef";
+            progressbar.style.backgroundColor = "green";
+            //progressbar.style.backgroundColor = "red";
+        }
+        else {
+            progressbar.style.backgroundColor = "#b3b3ef";
+        };
+        progressbar.style.width = initialprogressNum;
+        progressValue.innerHTML = initialprogresspercentage;
 
-        const cancel=this.shadowRoot.querySelector(".cancel");
-        cancel.addEventListener("click", () =>this.deleteItem());
+        for ( let i = 0, len = checkboxinputs.length; i < len; i++ ) {
+            console.log("hii")
+            // initialize local storage for each checkbox
+            // let box = checkboxinputs[i];
+            // if (box.hasAttribute("id")) {
+            //     console.log("hello")
+            //     this.setupLocalStorage(box);
+            // }
+            //event listener to detect checkbox changes
+            checkboxinputs[i].onclick= function(e){
+                console.log("hii")
+                //this.checked();
+
+                //calculate total number of checked boxes
+                
+                console.log("hii")
+                let checkedboxes = 0;
+                for ( let i = 0, len = checkboxinputs.length; i < len; i++ ) {
+                    if (checkboxinputs[i].checked) {
+                        checkedboxes++;
+                    };
+                } 
+                let progressNum = ((checkedboxes / checkboxinputs.length) * 100);
+                let progresspercentage = ((checkedboxes/ checkboxinputs.length) * 100) + "%";
+                let roundpercentage = Math.round((checkedboxes / checkboxinputs.length) * 100) + "% Complete";
+                //this.updateProgressbar();
+                // Updating the progress bar
+                if (progressNum === 100) {
+                    // progressbar.style.backgroundColor = "#b3b3ef";
+                     progressbar.style.backgroundColor = "green";
+                     //progressbar.style.backgroundColor = "red";
+                 }
+                 else {
+                     progressbar.style.backgroundColor = "#b3b3ef";
+                 };
+
+                progressbar.style.width = progresspercentage;
+                progressValue.innerHTML = roundpercentage;
+            };
+        };
+    };
+        
+        
+    
+        
+   // updateProgressbar() {
+    
+
+        // // SETUP LOCAL STORAGE
+    setupLocalStorage(box) {
+        let storageId = box.getAttribute("id");
+        var oldVal    = localStorage.getItem(storageId);
+        
+        // initial sync with local storage
+        if (oldVal == "true") {
+            box.checked = true;
+        } else {
+            box.checked = false;
+        };     
+        
+        box.addEventListener("change", function() {
+            localStorage.setItem(storageId, this.checked); 
+        });
+    
+    };
+
+    connectedCallback() {
+        
+        // methods call back
         this.shadowRoot.querySelector("#toggle-info").addEventListener("click", () => this.toggleInput());
         this.shadowRoot.querySelector("#addInput").addEventListener("click", () => this.addValueSubmitted());
         this.shadowRoot.querySelector("h1").innerText=this.getAttribute("title");
+        this.todoAddRemove ();
+        this.progressBar();
+    
+        // INIT PROGRESS BAR 
+        // checked();
+        // updateProgressbar();
+        // setupLocalStorage(box)
     }
 }
 
 class Sentence extends RootComponent{
     constructor(){
         super();
+        //append template to class
         this.shadowRoot.appendChild(sentence.content.cloneNode(true));
     }
     connectedCallback() {
@@ -121,6 +212,7 @@ class Sentence extends RootComponent{
 class Frequency extends RootComponent{
     constructor(){
         super();
+        //append template to class
         this.shadowRoot.appendChild(frequency.content.cloneNode(true));
     }
     connectedCallback() {

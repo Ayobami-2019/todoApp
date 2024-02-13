@@ -92,11 +92,16 @@ todo.innerHTML=`
             color: #babaf0;
             
         }
-        .bar{
-            border: 1px solid #babaf0;
+        .bar-div{
             border-radius: 10px;
             width: 100%;
-            padding: 10px 0 !important;
+            height: 20px;
+            border: 1px solid #babaf0;
+        }
+        .bar{
+            border-radius: 10px;
+            width: 100%;
+            height: 20px;
         }
         .barDiv p{
             text-align: center;
@@ -121,6 +126,7 @@ todo.innerHTML=`
             display: flex;
             flex-direction: row;
             align-items: center;
+            cursor: pointer;
         }
         .eachTodo input, .eachTodo input span{
             display: flex;
@@ -132,6 +138,9 @@ todo.innerHTML=`
             right: 0;
             color: #b5ea81;
             display: none;
+        }
+        .hide{
+            
         }
        
         .container {
@@ -208,10 +217,12 @@ todo.innerHTML=`
             <button id="addInput">Add</button>
         </div>
         <div class="barDiv" >
-            <div class="bar"></div><slot name ="bar"/>
-            <p>33% Complete</p>    <slot name ="bar"/>
-        </div>      
+            <div class="bar-div">
+                <div class="bar"></div></div>
+            <p>33% Complete</p> 
+        </div>     
         <div class="todoDiv">
+            
             <div class="eachToDo">
                 <label class="container">
                     <input type="checkbox"  name="done" id="done" checked="checked">
@@ -220,8 +231,7 @@ todo.innerHTML=`
                 <p>Meditation</p>
                 <div class="cancel">x</div>
             </div>
-            
-            <div class="eachToDo"><slot name ="todos"/>
+            <div class="eachToDo">
                 <label class="container">
                     <input type="checkbox"  name="done" id="done">
                     <span class="checkmark"></span>
@@ -229,7 +239,7 @@ todo.innerHTML=`
                 <p>Pick up Anna</p>
                 <div class="cancel">x</div>
             </div>
-            <div class="eachToDo"><slot name ="todos"/>
+            <div class="eachToDo">
                 <label class="container">
                     <input type="checkbox"  name="done" id="done">
                     <span class="checkmark"></span>
@@ -237,7 +247,7 @@ todo.innerHTML=`
                 <p>Set up meeting with Jay</p>
                 <div class="cancel">x</div>
             </div>
-            <div class="eachToDo"><slot name ="todos"/>
+            <div class="eachToDo">
                 <label class="container">
                     <input type="checkbox"  name="done" id="done">
                     <span class="checkmark"></span>
@@ -245,7 +255,7 @@ todo.innerHTML=`
                 <p>Finish Daily Ui</p>
                 <div class="cancel">x</div>
             </div>
-            <div class="eachToDo"><slot name ="todos"/>
+            <div class="eachToDo">
                 <label class="container">
                     <input type="checkbox"  name="done" id="done">
                     <span class="checkmark"></span>
@@ -253,7 +263,7 @@ todo.innerHTML=`
                 <p>Second edits on article</p>
                 <div class="cancel">x</div>
             </div>
-            <div class="eachToDo"><slot name ="todos"/>
+            <div class="eachToDo">
                 <label class="container">
                     <input type="checkbox"  name="done" id="done" checked="checked">
                     <span class="checkmark"></span>
@@ -261,7 +271,7 @@ todo.innerHTML=`
                 <p>Email Chris</p>
                 <div class="cancel">x</div>
             </div>
-        </div>         
+        </div><slot name ="todos"/>         
     </div>
 
     
