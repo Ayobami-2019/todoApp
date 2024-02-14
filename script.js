@@ -63,11 +63,12 @@ class ToDo extends RootComponent{
             <span class="checkmark"></span>
         </label>
         <p>${inputValue}</p>
+        <div class="cancel">x</div>
         `
         console.log (newToDoDiv)
         this.shadowRoot.querySelector(".todoDiv").append(newToDoDiv);
-        scroll.scrollIntoView()
-
+        this.todoAddRemove()
+        this.progressBar()
         getInputValue.value=""
     } 
     // method to add or remove a selected item

@@ -119,6 +119,9 @@ todo.innerHTML=`
         .todoDiv::-webkit-scrollbar {
             width: 1px;
         }
+        // ::-webkit-scrollbar {
+        //     width: 3px;
+        //   }
         .eachToDo{
             display: flex;
             flex-direction: row;
